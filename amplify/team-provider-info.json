@@ -1,0 +1,20 @@
+{
+  "dev": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-suia-dev-165551-authRole",
+      "UnauthRoleArn": "arn:aws:iam::563415521084:role/amplify-suia-dev-165551-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::563415521084:role/amplify-suia-dev-165551-authRole",
+      "Region": "us-east-1",
+      "DeploymentBucketName": "amplify-suia-dev-165551-deployment",
+      "UnauthRoleName": "amplify-suia-dev-165551-unauthRole",
+      "StackName": "amplify-suia-dev-165551",
+      "StackId": "arn:aws:cloudformation:us-east-1:563415521084:stack/amplify-suia-dev-165551/33559360-05c3-11eb-aef5-0e69ad9c0ded",
+      "AmplifyAppId": "d2y0k549gk4moc"
+    },
+    "categories": {
+      "auth": {
+        "suiaea71c1e2": {}
+      }
+    }
+  }
+}

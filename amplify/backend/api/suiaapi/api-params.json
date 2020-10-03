@@ -1,0 +1,35 @@
+{
+    "paths": [
+        {
+            "name": "/items",
+            "lambdaFunction": "suiaTestLamda",
+            "privacy": {
+                "open": true
+            },
+            "policyResourceName": "/items"
+        }
+    ],
+    "resourceName": "suiaapi",
+    "apiName": "suiaapi",
+    "functionArns": [
+        {
+            "lambdaFunction": "suiaTestLamda"
+        }
+    ],
+    "privacy": {
+        "auth": 0,
+        "unauth": 0,
+        "authRoleName": "amplify-suia-dev-165551-authRole",
+        "unAuthRoleName": "amplify-suia-dev-165551-unauthRole"
+    },
+    "dependsOn": [
+        {
+            "category": "function",
+            "resourceName": "suiaTestLamda",
+            "attributes": [
+                "Name",
+                "Arn"
+            ]
+        }
+    ]
+}
