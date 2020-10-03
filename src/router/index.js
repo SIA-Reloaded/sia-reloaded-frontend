@@ -1,14 +1,7 @@
-import { createWebHistory, createRouter } from 'vue-router';
+import VueRouter from 'vue-router';
 import LoginComponent from '../components/login';
 
 const routes = [
-    {
-        path: '/',
-        redirect: () => {
-            let is_logged = false;
-            return (is_logged) ? '/home' : '/login';
-        }
-    },
     {
         path: '/login',
         name: 'login',
@@ -16,9 +9,9 @@ const routes = [
     }
 ]
 
-const router = createRouter({
-    history: createWebHistory(),
+const router = new VueRouter({
     routes,
+    mode: 'history'
 })
 
 export default router;

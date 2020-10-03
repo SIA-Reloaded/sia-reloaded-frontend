@@ -1,8 +1,10 @@
 <template>
-  <navbar></navbar>
-  <article>
-    <router-view></router-view>
-  </article>
+  <div>
+    <navbar></navbar>
+    <article>
+      <router-view></router-view>
+    </article>
+  </div>
 </template>
 
 <script>
