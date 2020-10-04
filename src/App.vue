@@ -15,6 +15,11 @@ export default {
   components: {
     navbar,
   },
+  data() {
+    return {
+      user: null
+    }
+  }
 };
 </script>
 
