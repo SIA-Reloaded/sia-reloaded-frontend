@@ -3,6 +3,8 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import router from './router'
 
+import Fragment from 'vue-fragment'
+
 import App from './App.vue'
 
 import Amplify, { Auth } from 'aws-amplify'
@@ -35,6 +37,7 @@ Amplify.configure({
 Vue.config.productionTip = false
 
 Vue.use(VueRouter)
+Vue.use(Fragment.Plugin)
 
 new Vue({
   router,
