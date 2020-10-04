@@ -1,27 +1,21 @@
 <template>
-  <div class="wrapper">
-    <span>{{ message }}</span>
+  <div id="home">
+    <sidebar class="sidebar"></sidebar>
+    <div class="wrapper">
+      <span>{{ message }}</span>
+    </div>
   </div>
 </template>
 
 <script>
-import { API, Auth } from "aws-amplify";
+// import { API, Auth } from "aws-amplify";
+import sidebar from './sidebar'
 export default {
   name: "HomeComponent",
-  methods: {
-    async getBasicData() {
-      return await API.get("suiaapi", "/", {
-        headers: {
-          Authorization: `Bearer ${(await Auth.currentSession())
-            .getIdToken()
-            .getJwtToken()}`,
-        },
-        response: true,
-      })
-    },
-  },
-  mounted() {
-      console.log(this.getBasicData())
+  methods: {},
+  mounted() {},
+  components: {
+    sidebar
   },
   data: function () {
     return {
@@ -30,3 +24,22 @@ export default {
   },
 };
 </script>
+
+<style>
+#home {
+  display: grid;
+  grid-template-columns: 15vw 1fr;
+  grid-template-rows: 1fr;
+  grid-template-areas: "sidebar content";
+  height: 100%;
+}
+.sidebar {
+  grid-area: sidebar;
+}
+.wrapper {
+  grid-area: content;
+  background: url("../assets/img/background-login.jpeg") no-repeat;
+  /* Todo: Nueva imagen */
+  background-size: cover;
+}
+</style>
