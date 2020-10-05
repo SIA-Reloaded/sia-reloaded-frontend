@@ -44,6 +44,8 @@ export default {
     signIn: async function () {
       try {
         await Auth.signIn(this.username, this.password)
+        console.log(Auth.user.attributes.email)
+        this.$emit("userReached", {email: Auth.user.attributes.email})
         router.push('home')
       } catch (error) {
         this.errorMessage = error.name

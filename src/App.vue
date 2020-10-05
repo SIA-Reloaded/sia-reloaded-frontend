@@ -2,7 +2,7 @@
   <div id="main">
     <navbar class="navbar"></navbar>
     <article>
-      <router-view></router-view>
+      <router-view v-on:userReached="setUser" v-bind:user="user"></router-view>
     </article>
   </div>
 </template>
@@ -14,6 +14,11 @@ export default {
   name: "App",
   components: {
     navbar,
+  },
+  methods: {
+    setUser(user) {
+      this.user = user
+    }
   },
   data() {
     return {
