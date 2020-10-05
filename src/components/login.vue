@@ -46,10 +46,10 @@ export default {
         await Auth.signIn(this.username, this.password)
         console.log(Auth.user.attributes.email)
         this.$emit("userReached", {email: Auth.user.attributes.email})
-        router.push('home')
       } catch (error) {
         this.errorMessage = error.name
       }
+      router.push('home')
     },
   },
   data: function () {

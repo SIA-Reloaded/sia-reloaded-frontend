@@ -1,14 +1,11 @@
 <template>
   <nav id="sidebar-wrapper">
       <div class="item">
-          Hoja de vida
-      </div>
-      <div class="item">
           Apoyo académico
       </div>
-      <div class="subitem">
+      <router-link class="subitem" to="/courses/assigned">
           Cursos asignados
-      </div>
+      </router-link>
     <!-- <router-link
       class="item"
       v-for="item in items"
