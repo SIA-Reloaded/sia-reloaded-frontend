@@ -1,0 +1,88 @@
+{
+  "providers": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-suia-dev-165551-authRole",
+      "UnauthRoleArn": "arn:aws:iam::563415521084:role/amplify-suia-dev-165551-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::563415521084:role/amplify-suia-dev-165551-authRole",
+      "Region": "us-east-1",
+      "DeploymentBucketName": "amplify-suia-dev-165551-deployment",
+      "UnauthRoleName": "amplify-suia-dev-165551-unauthRole",
+      "StackName": "amplify-suia-dev-165551",
+      "StackId": "arn:aws:cloudformation:us-east-1:563415521084:stack/amplify-suia-dev-165551/33559360-05c3-11eb-aef5-0e69ad9c0ded",
+      "AmplifyAppId": "d2y0k549gk4moc"
+    }
+  },
+  "auth": {
+    "suiaea71c1e2": {
+      "service": "Cognito",
+      "providerPlugin": "awscloudformation",
+      "dependsOn": [],
+      "customAuth": false,
+      "providerMetadata": {
+        "s3TemplateURL": "https://s3.amazonaws.com/amplify-suia-dev-165551-deployment/amplify-cfn-templates/auth/suiaea71c1e2-cloudformation-template.yml",
+        "logicalId": "authsuiaea71c1e2"
+      },
+      "lastPushTimeStamp": "2020-10-04T03:59:54.895Z",
+      "output": {
+        "AppClientSecret": "q84mqi0759l5ipva4ci3j53c4rfcn5ltbgch11i7clqfdjhi9cl",
+        "UserPoolId": "us-east-1_1H3phOiUI",
+        "AppClientIDWeb": "50i73pu4cr3okmf8lm9q5cpb5k",
+        "AppClientID": "38ermg0o4pc8a45ianbn9o7j7m",
+        "IdentityPoolId": "us-east-1:3e2b4338-299f-4ce1-8e38-c7514fb58a07",
+        "IdentityPoolName": "suiaea71c1e2_identitypool_ea71c1e2__dev",
+        "UserPoolName": "suiaea71c1e2_userpool_ea71c1e2"
+      },
+      "lastPushDirHash": "tePlLLLonapM0lPY7j0g0bpjdOQ="
+    }
+  },
+  "function": {
+    "suiaTestLamda": {
+      "build": true,
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda",
+      "dependsOn": [],
+      "lastBuildTimeStamp": "2020-10-03T23:00:08.588Z",
+      "lastPackageTimeStamp": "2020-10-03T23:00:08.643Z",
+      "distZipFilename": "suiaTestLamda-4a72457a79366b657466-build.zip",
+      "providerMetadata": {
+        "s3TemplateURL": "https://s3.amazonaws.com/amplify-suia-dev-165551-deployment/amplify-cfn-templates/function/suiaTestLamda-cloudformation-template.json",
+        "logicalId": "functionsuiaTestLamda"
+      },
+      "lastPushTimeStamp": "2020-10-04T03:59:54.898Z",
+      "output": {
+        "Region": "us-east-1",
+        "Arn": "arn:aws:lambda:us-east-1:563415521084:function:suiaTestLamda-dev",
+        "Name": "suiaTestLamda-dev",
+        "LambdaExecutionRole": "suiaLambdaRoled3d6633d-dev"
+      },
+      "lastPushDirHash": "coDX1X0EkBWh8eDqACkXC3Ht+wM="
+    }
+  },
+  "api": {
+    "suiaapi": {
+      "service": "API Gateway",
+      "providerPlugin": "awscloudformation",
+      "dependsOn": [
+        {
+          "category": "function",
+          "resourceName": "suiaTestLamda",
+          "attributes": [
+            "Name",
+            "Arn"
+          ]
+        }
+      ],
+      "providerMetadata": {
+        "s3TemplateURL": "https://s3.amazonaws.com/amplify-suia-dev-165551-deployment/amplify-cfn-templates/api/suiaapi-cloudformation-template.json",
+        "logicalId": "apisuiaapi"
+      },
+      "lastPushTimeStamp": "2020-10-04T03:59:54.900Z",
+      "output": {
+        "ApiName": "suiaapi",
+        "RootUrl": "https://o6ebr9ta03.execute-api.us-east-1.amazonaws.com/dev",
+        "ApiId": "o6ebr9ta03"
+      },
+      "lastPushDirHash": "wVCO/6XTj9X2oG2lfdHIwEsK2ws="
+    }
+  }
+}

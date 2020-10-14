@@ -1,24 +1,23 @@
-import { createWebHistory, createRouter } from 'vue-router';
-import LoginComponent from '../components/login';
+import VueRouter from 'vue-router'
+import LoginComponent from '../components/login'
+import HomeComponent from '../components/home'
 
 const routes = [
-    {
-        path: '/',
-        redirect: () => {
-            let is_logged = false;
-            return (is_logged) ? '/home' : '/login';
-        }
-    },
     {
         path: '/login',
         name: 'login',
         component: LoginComponent,
+    },
+    {
+        path: '/home',
+        name: 'home',
+        component: HomeComponent,
     }
 ]
 
-const router = createRouter({
-    history: createWebHistory(),
+const router = new VueRouter({
     routes,
+    mode: 'history'
 })
 
-export default router;
+export default router

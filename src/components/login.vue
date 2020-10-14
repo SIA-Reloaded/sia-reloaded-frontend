@@ -3,12 +3,14 @@
     <div class="form-wrapper">
       <div class="form">
         <h1 class="title">Iniciar sesión</h1>
+        <span>{{ errorMessage }}</span>
         <div class="group">
           <input
             type="text"
             id="username"
             name="username"
             required
+            v-model="username"
           />
           <span class="highlight"></span>
           <span class="bar"></span>
@@ -20,12 +22,13 @@
             id="password"
             name="password"
             required
+            v-model="password"
           />
           <span class="highlight"></span>
           <span class="bar"></span>
           <label>Contraseña</label>
         </div>
-        <a div class="boton">Ingresar</a>
+        <button v-on:click="signIn">Iniciar Sesión</button>
       </div>
     </div>
     <div class="image"></div>
@@ -34,9 +37,28 @@
 
 
 <script>
+import { Auth } from "aws-amplify"
+import router from '../router'
 export default {
   name: "LoginComponent",
-};
+  methods: {
+    signIn: async function () {
+      try {
+        await Auth.signIn(this.username, this.password)
+        router.push('home')
+      } catch (error) {
+        this.errorMessage = error.name
+      }
+    },
+  },
+  data: function () {
+    return {
+      username: "",
+      password: "",
+      errorMessage: "",
+    }
+  },
+}
 </script>
 
 <style>
