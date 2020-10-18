@@ -6,6 +6,10 @@ import CourseComponent from '../components/course';
 
 const routes = [
     {
+        path: '/',
+        redirect: '/home'
+    },
+    {
         path: '/login',
         name: 'login',
         component: LoginComponent,
