@@ -37,20 +37,24 @@
 
 
 <script>
-import { Auth } from "aws-amplify"
-import router from '../router'
+// import { Auth } from "aws-amplify"
+// import router from '../router'
 export default {
   name: "LoginComponent",
   methods: {
     signIn: async function () {
       try {
-        await Auth.signIn(this.username, this.password)
-        console.log(Auth.user.attributes.email)
-        this.$emit("userReached", {email: Auth.user.attributes.email})
+        // await Auth.signIn(this.username, this.password)
+        setTimeout(async ()=> {
+          const res = await fetch(`https://62nbonex6j.execute-api.us-east-1.amazonaws.com/Prod/system/getUserData/${ this.username }`);
+          const data = await res.json();
+          console.log(data)
+          this.$emit("userReached", {user: data})
+          this.$router.push('home')
+        }, 1000)
       } catch (error) {
         this.errorMessage = error.name
       }
-      router.push('home')
     },
   },
   data: function () {

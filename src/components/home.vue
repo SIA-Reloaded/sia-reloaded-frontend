@@ -14,6 +14,7 @@ export default {
   name: "HomeComponent",
   methods: {},
   mounted() {},
+  props: ['user'],
   components: {
     sidebar
   },

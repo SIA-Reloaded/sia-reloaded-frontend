@@ -40,6 +40,7 @@
 import sidebar from "./sidebar";
 export default {
   name: "AssignedCoursesComponent",
+  props: ['user'],
   methods: {
     async getCourses() {
       try {

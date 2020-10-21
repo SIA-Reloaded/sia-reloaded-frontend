@@ -70,7 +70,7 @@ import {VueTabs, VTab} from 'vue-nav-tabs/dist/vue-tabs'
 import 'vue-nav-tabs/themes/vue-tabs.css'
 export default {
   name: "CourseComponent",
-  props: ['course_prop'],
+  props: ['course_prop', 'user'],
   methods: {
     async getCourse() {
       if (this.course_prop) {

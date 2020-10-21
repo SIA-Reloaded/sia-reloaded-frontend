@@ -1,6 +1,6 @@
 <template>
   <div id="main">
-    <navbar class="navbar"></navbar>
+    <navbar class="navbar" :user="user" :key="user"></navbar>
     <article>
       <router-view v-on:userReached="setUser" v-bind:user="user"></router-view>
     </article>
@@ -22,7 +22,7 @@ export default {
   },
   data() {
     return {
-      user: null,
+      user: {},
     };
   },
 }
@@ -48,7 +48,7 @@ body {
 #main {
   display: grid;
   grid-template-columns: 1fr;
-  grid-template-rows: 10vh 90vh;
+  grid-template-rows: 5vh 95vh;
   grid-template-areas:
     "header"
     "content";

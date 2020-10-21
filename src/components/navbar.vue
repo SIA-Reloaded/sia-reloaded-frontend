@@ -1,15 +1,21 @@
 <template>
     <header>
-        <div class="cajoncito" style="width:100%;height:100%;">
-            <svg width='40%' height='40%' viewBox="0 0 120 120" preserveAspectRatio="none" style='background-color:  transparent'>
-                <polygon points="0,0 40,0 40,38 0,35" style="fill:white" />
-            </svg>
-        </div>
         <div class="logo">
             <img class="logo-img" src="../assets/img/logo.png" alt="Logo Universidad Nacional de Colombia">
         </div>
         <div class="header-title">
             <span>Sistema Unificado de Información Académica</span>
+        </div>
+        <div class="header__menu">
+            <div class="header__menu--profile">
+                <p>Usuario</p>
+            </div>
+            <ul>
+                <div v-if="user.user.roles">
+                    <li v-for="role in user.user.roles" :key="role"><a href="/">{{ role }}</a></li>
+                </div>
+                <li><a href="/login">Cerrar sesión</a></li>
+            </ul>
         </div>
     </header>
 </template>
@@ -17,6 +23,10 @@
 <script>
 export default {
   name: "navbar",
+  props: ['user'],
+  mounted() {
+      console.log(this.user);
+  }
 };
 </script>
 
@@ -27,42 +37,92 @@ export default {
     header {
         color: white;
         background-color: #94B43B;
-        display: grid;
-        grid-template-columns: 2vw repeat(7, 1fr) 2vw;
-        grid-template-rows: 1fr;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
         border-bottom: 1px solid #707070;
     }
     .header-title {
-        grid-column: 3/-2;
-        grid-row: 1;
         font-family: AncizarSansItalic;
-        padding-top: 25px;
+        align-self: center;
         text-align: center;
-        font-size: 250%;
         font-display: auto ;
+        font-size: 150%;
     }
    .logo {
-        grid-column: 2/3;
-        grid-template-columns: 2vw repeat(7, 1fr) 2vw;
-        grid-template-rows: 1fr;
-        position: absolute;
-        max-height:20%;
-        max-width:13%;
+        max-width: 6rem;
         padding-left: 10px;
         padding-right: 10px;
         z-index: 10;
+        background-color: white;
     }
     .logo-img {
-        width: 100%;
-        height: 60%;
+        max-height: 100%;
+        max-width: auto;
     }
     .cajoncito{
-        grid-template-columns: 2vw repeat(7, 1fr) 2vw;
         position: absolute;
         max-height:13%;
         max-width:13%;
         padding-left: 10px;
         padding-right: 5px; 
     }
-   
+    .menu {
+        color: white;
+        background-color: #76232f;
+        padding: 5px;
+        font-family: AncizarSansItalic;
+        max-height: 100%;
+    }
+
+    .header__menu {
+        color: white;
+        background-color: #76232f;
+        padding: 5px;
+        font-family: AncizarSansItalic;
+        max-height: 100%;
+        display: flex;
+        align-items: center;
+    }
+    .header__menu ul {
+    display: none;
+    list-style: none;
+    padding: 0px;
+    position: absolute;
+    width: 100px;
+    text-align: right;
+    margin: 12vh 0 0 -41px;
+    background-color: #76232f;
+    }
+    .header__menu li {
+    margin: 10px 0;
+    }
+    .header__menu li a {
+    color: white;
+    text-decoration: none;
+    }
+    .header__menu li a:hover {
+    text-decoration: underline;
+    }
+
+    .header__menu:hover ul,
+    ul:hover {
+    display: block;
+    }
+
+    .header__menu--profile {
+    margin-right: 8px;
+    display: flex;
+    align-items: center;
+    }
+    .header__menu--profile img {
+    margin-right: 8px;
+    width: 40px;
+    }
+    .header__menu--profile p {
+    margin: 0;
+    color: white;
+    }
+
+
 </style>
