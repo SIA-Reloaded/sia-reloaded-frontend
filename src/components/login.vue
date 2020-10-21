@@ -35,6 +35,7 @@
   </div>
 </template>
 
+
 <script>
 import { Auth } from "aws-amplify"
 import router from '../router'
@@ -63,6 +64,7 @@ export default {
 </script>
 
 <style>
+
 .wrapper {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -73,38 +75,47 @@ export default {
   grid-column: 1/2;
   background-color: #b1b2b0;
   display: grid;
-  grid-template: 1fr 70vh 1fr / 1fr 40vw 1fr;
+  grid-template: 1fr 1fr / 1fr 40vw 1fr;
 }
 .form {
+  position: relative;
+  top: 80px;
+  width: 90%;
+  height: 100%;
+  display:inline-block;
   grid-column: 2/3;
-  grid-row: 2/3;
+  grid-row: 1fr;
   background-color: rgba(255, 255, 255, 0.4);
   border: 1px solid #707070;
-  border-radius: 1em;
+  border-radius: 2em;
   text-align: center;
 }
 .image {
   grid-column: 2/3;
+  grid-row: 1fr;
   background: url("../assets/img/background-login.jpeg") no-repeat;
   background-size: cover;
 }
 .title {
+  margin:40px 6px 2px 0;
   font-family: AncizarSansLight;
   color: #707070;
-  font-size: 2em;
+  font-size: 310%;
+  letter-spacing: 4px;
 }
 .group {
   position: relative;
-  margin-bottom: 45px;
+  margin-bottom: 5%;
   background-color: rgba(255, 255, 255, 0);
 }
 input {
+  margin:80px 6px 2px 0;
   font-size: 18px;
-  padding: 10px 10px 10px 5px;
-  display: block;
-  width: 300px;
+  padding: 10px 60px 10px 5px;
+  display: inline-block;
+  width: 62%;
   border: none;
-  border-bottom: 1px solid #707070;
+  border-bottom: 2px solid #707070;
   background-color: rgba(255, 255, 255, 0);
 }
 input:focus {
@@ -113,13 +124,14 @@ input:focus {
 
 /* LABEL ======================================= */
 label {
+  padding-left: 12%;
   color: #707070;
-  font-size: 18px;
+  font-size: 180%;
   font-weight: normal;
   position: absolute;
   pointer-events: none;
   left: 5px;
-  top: 10px;
+  top: 60px;
   transition: 0.2s ease all;
   -moz-transition: 0.2s ease all;
   -webkit-transition: 0.2s ease all;
@@ -129,21 +141,24 @@ label {
 /* active state */
 input:focus ~ label,
 input:valid ~ label {
-  top: -20px;
-  font-size: 14px;
+  top: 50px;
+  font-size: 18px;
   color: #707070;
 }
 
 /* BOTTOM BARS ================================= */
 .bar {
+  margin-left: auto;
+  margin-right: auto;
   position: relative;
-  display: block;
-  width: 300px;
+  left: -65px;
+  display:block;
+  width: 50%;
 }
 .bar:before,
 .bar:after {
   content: "";
-  height: 2px;
+  height: 3px;
   width: 0;
   bottom: 1px;
   position: absolute;
@@ -153,20 +168,43 @@ input:valid ~ label {
   -webkit-transition: 0.2s ease all;
 }
 .bar:before {
-  left: 50%;
+  left: 60%;
 }
 .bar:after {
-  right: 50%;
+  right: 25%;
 }
 
 /* active state */
 input:focus ~ .bar:before,
 input:focus ~ .bar:after {
-  width: 50%;
+  width: 80%;
 }
+
+.boton{
+
+  margin:40px 6px 60px 0;
+  color:#ffffff;
+  font-weight: 500;
+  display:inline-block;
+  font-family: AncizarSansLight;
+  letter-spacing: 10px;
+  padding-top: 1%;
+  padding-bottom: 1%;
+  padding-left: 12%;
+  padding-right: 12%;
+  text-align: center;
+  font-size: 200%;
+  background-color: #94B43B;
+  border-radius: 10px;
+  border: 1px solid #777;
+  }
+
+
+
 
 /* HIGHLIGHTER ================================== */
 .highlight {
+
   position: absolute;
   height: 60%;
   width: 100px;

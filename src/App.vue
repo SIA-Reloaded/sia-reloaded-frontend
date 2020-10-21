@@ -42,7 +42,7 @@ export default {
   src: url("./assets/ancizar-font/AncizarSans-Italic.otf");
 }
 body {
-  margin: 0;
+  width:100%;
 }
 #main {
   display: grid;
