@@ -28,6 +28,7 @@ const routes = [
         path: '/courses/:course_id',
         name: 'course',
         component: CourseComponent,
+        props: true
     },
 ]
 

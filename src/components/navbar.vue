@@ -46,8 +46,8 @@ export default {
         grid-template-columns: 2vw repeat(7, 1fr) 2vw;
         grid-template-rows: 1fr;
         position: absolute;
-        height:20%;
-        width:13%;
+        max-height:20%;
+        max-width:13%;
         padding-left: 10px;
         padding-right: 10px;
         z-index: 10;
@@ -59,8 +59,8 @@ export default {
     .cajoncito{
         grid-template-columns: 2vw repeat(7, 1fr) 2vw;
         position: absolute;
-        height:13%;
-        width:13%;
+        max-height:13%;
+        max-width:13%;
         padding-left: 10px;
         padding-right: 5px; 
     }

@@ -3,7 +3,7 @@
       <div class="item">
           Apoyo académico
       </div>
-      <router-link class="subitem" to="/courses/assigned">
+      <router-link class="subitem" to="/teacher/courses">
           Cursos asignados
       </router-link>
     <!-- <router-link

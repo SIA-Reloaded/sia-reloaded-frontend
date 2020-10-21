@@ -25,9 +25,9 @@
           >
             <div class="course-code">{{ course.code }}</div>
             <h4 class="course-name">{{ course.name }}</h4>
-            <div class="course-group">Grupo {{ course.group }}</div>
-            <div class="course-group">Número de estudiantes: {{ course.capacity }}</div>
-            <div class="course-link"><router-link v-bind:to="{ name: 'course', params: {'course_id': course.id}, props: {course}}" class="course-link-a">Ir al curso</router-link></div>
+            <span class="course-group">Grupo {{ course.group }}</span>
+            <span class="course-group">Número de estudiantes: {{ course.capacity }}</span>
+            <span class="course-link"><router-link v-bind:to="{ name: 'course', params: {'course_id': course.id, 'course_prop': course}}" class="course-link-a">Ir al curso</router-link></span>
           </div>
         </div>
       </div>
@@ -44,13 +44,8 @@ export default {
     async getCourses() {
       try {
         this.loading_courses = true;
-        const res = await fetch('https://62nbonex6j.execute-api.us-east-1.amazonaws.com/Prod/teachers/getCourses?teacherID=test', {
-          mode: 'cors',
-          headers: {
-            'Access-Control-Allow-Origin': '*',
-          }
-        });
-        const data = res.json();
+        const res = await fetch('https://62nbonex6j.execute-api.us-east-1.amazonaws.com/Prod/teachers/getCourses?teacherID=test');
+        const data = await res.json();
         this.courses = data;
         this.loading_courses = false;
       } catch (error) {

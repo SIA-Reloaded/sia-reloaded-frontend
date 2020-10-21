@@ -11,6 +11,15 @@ import Amplify, { Auth } from 'aws-amplify'
 import '@aws-amplify/ui-vue'
 // import aws_exports from './aws-exports'
 
+import { library } from '@fortawesome/fontawesome-svg-core'
+import { faLongArrowAltLeft } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
+
+
+library.add(faLongArrowAltLeft)
+ 
+Vue.component('font-awesome-icon', FontAwesomeIcon)
+
 
 // Amplify.configure(aws_exports)
 Amplify.configure({

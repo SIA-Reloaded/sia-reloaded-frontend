@@ -3,7 +3,8 @@
     <sidebar class="sidebar"></sidebar>
     <div class="course-wrapper">
       <h2 class="course-title">
-        {{ loading_course ? "Cargando" : course_mock.name }}
+        <a @click="$router.go(-1)"><font-awesome-icon icon="long-arrow-alt-left" /></a>
+        {{ loading_course ? "Cargando" : course.name }}
       </h2>
       <div class="course">
         <div class="loading-icon-wrapper" v-if="loading_course">
@@ -20,31 +21,42 @@
           </div>
         </div>
         <div class="course-info" v-else>
-          <div class="course-info-columns">
-            <div class="course-info-1">
-              <p><b>Código:</b> {{ course_mock.code }}</p>
-              <p><b>Grupo:</b> {{ course_mock.group }}</p>
-              <p><b>Créditos:</b> {{ course_mock.credits }}</p>
-            </div>
-            <div class="course-info-2">
-              <p>
-                <b>Monitor:</b> {{ course_mock.monitor.name }}
-                {{ course_mock.monitor.lastname }} ({{ course_mock.monitor.email }})
-              </p>
-            </div>
-          </div>
-          <div class="student-list">
-            <h3 class="course-title">Estudiantes</h3>
-            <div
-              v-for="student in course_mock.students"
-              v-bind:key="student.id"
-              class="student"
-            >
-              <div class="student-id">{{ student.id }}</div>
-              <div class="student-name">{{ student.name }} {{ student.lastname }}</div>
-              <div class="student-email">{{ student.email }}</div>
-            </div>
-          </div>
+          <vue-tabs>
+            <v-tab title="Información General">
+              <div class="course-info-columns">
+                <div class="course-info-1">
+                  <p><b>Código:</b> {{ course.id }}</p>
+                  <p><b>Grupo:</b> {{ course.group }}</p>
+                  <p><b>Alumnos:</b> {{ course.students.length }}</p>
+                  <p><b>Créditos:</b> {{ course.credits }}</p>
+                  <p><b>Horario:</b> {{ scheduleStr }}</p>
+                </div>
+                <div class="course-info-2">
+                  <p v-if="course.monitor">
+                    <b>Monitor:</b> {{ course.monitor.name }}
+                    {{ course.monitor.lastname }} ({{ course.monitor.email }})
+                  </p>
+                </div>
+              </div>
+            </v-tab>
+
+            <v-tab title="Alumnos">
+              <div class="student-list">
+                <h3 class="course-title">Estudiantes</h3>
+                <div
+                  v-for="student in course.students"
+                  v-bind:key="student.id"
+                  class="student"
+                >
+                  <div class="student-id">{{ student.id }}</div>
+                  <div class="student-name">{{ student.firstName }} {{ student.lastName }}</div>
+                  <div class="student-email">{{ student.email }}</div>
+                </div>
+              </div>
+            </v-tab>
+          </vue-tabs>
+          
+          
         </div>
       </div>
     </div>
@@ -54,90 +66,27 @@
 <script>
 // import { API, Auth } from "aws-amplify";
 import sidebar from "./sidebar";
+import {VueTabs, VTab} from 'vue-nav-tabs/dist/vue-tabs'
+import 'vue-nav-tabs/themes/vue-tabs.css'
 export default {
   name: "CourseComponent",
-  props: ['course'],
+  props: ['course_prop'],
   methods: {
     async getCourse() {
-      console.log(this.course)
-      const delay = (ms) => new Promise((res) => setTimeout(res, ms));
-      await delay(3000);
-      this.course_mock = {
-        id: this.$route.params.course_id,
-        code: "100000-0",
-        group: "2",
-        name: "Ingeniería de software 2",
-        credits: 3,
-        monitor: {
-          id: "123",
-          name: "Menganito",
-          lastname: "Perez",
-          email: "mperez@unal.test.co",
-        },
-        students: [
-          {
-            id: "123",
-            name: "Menganito",
-            lastname: "Perez",
-            email: "mperez@unal.test.co",
-          },
-          {
-            id: "123",
-            name: "Menganito",
-            lastname: "Perez",
-            email: "mperez@unal.test.co",
-          },
-          {
-            id: "123",
-            name: "Menganito",
-            lastname: "Perez",
-            email: "mperez@unal.test.co",
-          },
-          {
-            id: "123",
-            name: "Menganito",
-            lastname: "Perez",
-            email: "mperez@unal.test.co",
-          },
-          {
-            id: "123",
-            name: "Menganito",
-            lastname: "Perez",
-            email: "mperez@unal.test.co",
-          },
-          {
-            id: "123",
-            name: "Menganito",
-            lastname: "Perez",
-            email: "mperez@unal.test.co",
-          },
-          {
-            id: "123",
-            name: "Menganito",
-            lastname: "Perez",
-            email: "mperez@unal.test.co",
-          },
-          {
-            id: "123",
-            name: "Menganito",
-            lastname: "Perez",
-            email: "mperez@unal.test.co",
-          },
-          {
-            id: "123",
-            name: "Menganito",
-            lastname: "Perez",
-            email: "mperez@unal.test.co",
-          },
-          {
-            id: "123",
-            name: "Menganito",
-            lastname: "Perez",
-            email: "mperez@unal.test.co",
-          },
-        ],
-      };
-      this.loading_course = false;
+      if (this.course_prop) {
+        this.course = this.course_prop;
+        this.loading_course = false;
+      } else {
+        try {
+          this.loading_course = true;
+          const res = await fetch(`https://62nbonex6j.execute-api.us-east-1.amazonaws.com/Prod/teachers/getCourse?teacherID=test&courseID=${ this.$route.params.course_id }`);
+          const data = await res.json();
+          this.course = data;
+          this.loading_course = false;
+        } catch (error) {
+          console.error(error);
+        }
+      }
     },
   },
   mounted() {
@@ -145,10 +94,22 @@ export default {
   },
   components: {
     sidebar,
+    VueTabs,
+    VTab
+  },
+  computed: {
+    scheduleStr() {
+      const str = [];
+      for (let i = 0; i < this.course.schedule.length; i++) {
+        const day = this.course.schedule[i];
+        str.push(`${day.weekday} ${day.start_hour}:00-${day.end_hour}:00`);
+      }
+      return str.join(' / ');
+    }
   },
   data: function () {
     return {
-      course_mock: {},
+      course: {},
       loading_course: true,
     };
   },

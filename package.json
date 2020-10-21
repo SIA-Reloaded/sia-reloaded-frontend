@@ -9,10 +9,14 @@
   },
   "dependencies": {
     "@aws-amplify/ui-vue": "^0.2.22",
+    "@fortawesome/fontawesome-svg-core": "^1.2.32",
+    "@fortawesome/free-solid-svg-icons": "^5.15.1",
+    "@fortawesome/vue-fontawesome": "^2.0.0",
     "aws-amplify": "^3.3.3",
     "core-js": "^3.6.5",
     "vue": "^2.6.11",
     "vue-fragment": "^1.5.1",
+    "vue-nav-tabs": "^0.5.7",
     "vue-router": "^3.4.5"
   },
   "devDependencies": {
