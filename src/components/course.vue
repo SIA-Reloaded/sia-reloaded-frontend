@@ -3,7 +3,7 @@
     <sidebar class="sidebar"></sidebar>
     <div class="course-wrapper">
       <h2 class="course-title">
-        {{ loading_course ? "Cargando" : course.name }}
+        {{ loading_course ? "Cargando" : course_mock.name }}
       </h2>
       <div class="course">
         <div class="loading-icon-wrapper" v-if="loading_course">
@@ -22,21 +22,21 @@
         <div class="course-info" v-else>
           <div class="course-info-columns">
             <div class="course-info-1">
-              <p><b>Código:</b> {{ course.code }}</p>
-              <p><b>Grupo:</b> {{ course.group }}</p>
-              <p><b>Créditos:</b> {{ course.credits }}</p>
+              <p><b>Código:</b> {{ course_mock.code }}</p>
+              <p><b>Grupo:</b> {{ course_mock.group }}</p>
+              <p><b>Créditos:</b> {{ course_mock.credits }}</p>
             </div>
             <div class="course-info-2">
               <p>
-                <b>Monitor:</b> {{ course.monitor.name }}
-                {{ course.monitor.lastname }} ({{ course.monitor.email }})
+                <b>Monitor:</b> {{ course_mock.monitor.name }}
+                {{ course_mock.monitor.lastname }} ({{ course_mock.monitor.email }})
               </p>
             </div>
           </div>
           <div class="student-list">
             <h3 class="course-title">Estudiantes</h3>
             <div
-              v-for="student in course.students"
+              v-for="student in course_mock.students"
               v-bind:key="student.id"
               class="student"
             >
@@ -56,11 +56,13 @@
 import sidebar from "./sidebar";
 export default {
   name: "CourseComponent",
+  props: ['course'],
   methods: {
     async getCourse() {
+      console.log(this.course)
       const delay = (ms) => new Promise((res) => setTimeout(res, ms));
       await delay(3000);
-      this.course = {
+      this.course_mock = {
         id: this.$route.params.course_id,
         code: "100000-0",
         group: "2",
@@ -146,7 +148,7 @@ export default {
   },
   data: function () {
     return {
-      course: {},
+      course_mock: {},
       loading_course: true,
     };
   },

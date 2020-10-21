@@ -20,7 +20,7 @@ const routes = [
         component: HomeComponent,
     },
     {
-        path: '/courses/assigned',
+        path: '/teacher/courses',
         name: 'assigned_courses',
         component: AssignedCoursesComponent,
     }, 

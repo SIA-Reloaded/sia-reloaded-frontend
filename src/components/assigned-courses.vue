@@ -24,9 +24,10 @@
             class="course-item"
           >
             <div class="course-code">{{ course.code }}</div>
-            <div class="course-name">{{ course.name }}</div>
+            <h4 class="course-name">{{ course.name }}</h4>
             <div class="course-group">Grupo {{ course.group }}</div>
-            <div class="course-link"><router-link v-bind:to="'/courses/' + course.id" class="course-link-a">Ir al curso</router-link></div>
+            <div class="course-group">Número de estudiantes: {{ course.capacity }}</div>
+            <div class="course-link"><router-link v-bind:to="{ name: 'course', params: {'course_id': course.id}, props: {course}}" class="course-link-a">Ir al curso</router-link></div>
           </div>
         </div>
       </div>
@@ -41,41 +42,20 @@ export default {
   name: "AssignedCoursesComponent",
   methods: {
     async getCourses() {
-      const delay = (ms) => new Promise((res) => setTimeout(res, ms));
-      await delay(3000);
-      this.courses = [
-        {
-          id: "123",
-          code: "100000-0",
-          group: "2",
-          name: "Ingeniería de software 2",
-        },
-        {
-          id: "123",
-          code: "100000-0",
-          group: "2",
-          name: "Ingeniería de software 2",
-        },
-        {
-          id: "123",
-          code: "100000-0",
-          group: "2",
-          name: "Ingeniería de software 2",
-        },
-        {
-          id: "123",
-          code: "100000-0",
-          group: "2",
-          name: "Ingeniería de software 2",
-        },
-        {
-          id: "123",
-          code: "100000-0",
-          group: "2",
-          name: "Ingeniería de software 2",
-        },
-      ];
-      this.loading_courses = false;
+      try {
+        this.loading_courses = true;
+        const res = await fetch('https://62nbonex6j.execute-api.us-east-1.amazonaws.com/Prod/teachers/getCourses?teacherID=test', {
+          mode: 'cors',
+          headers: {
+            'Access-Control-Allow-Origin': '*',
+          }
+        });
+        const data = res.json();
+        this.courses = data;
+        this.loading_courses = false;
+      } catch (error) {
+        console.error(error);
+      }
     },
   },
   mounted() {
@@ -108,19 +88,20 @@ export default {
   grid-area: content;
   padding: 1em;
 }
+.list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  grid-gap: 20px;
+  align-items: stretch;
+}
+.list > .course-item {
+  border: 1px solid #ccc;
+  box-shadow: 2px 2px 6px 0px  rgba(0,0,0,0.3);
+  font-family: AncizarSansLight;
+}
 .courses-title {
   color: black;
   font-family: AncizarSansLight;
-}
-.course-item {
-  width: auto;
-  box-shadow: 0px 1px 1px 1px #777;
-  margin: 0.5em;
-  font-family: AncizarSansLight;
-  display: inline-grid;
-  grid-template-columns: 1fr 7fr minmax(300px, 1fr) 1fr;
-  grid-template-rows: 1.5em;
-  grid-template-areas: "code name group link";
 }
 
 .course-code {
@@ -129,12 +110,13 @@ export default {
   grid-area: code;
   color: white;
   background-color: #94b43b;
+  font-family: AncizarSansLight;
+
 }
 
 .course-name {
-  padding-left: 1em;
-  display: flex;
-  align-items: center;
+  margin: 0;
+  margin-bottom: 1em;
   grid-area: name;
   color: black;
 }
