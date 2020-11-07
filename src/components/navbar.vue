@@ -11,7 +11,7 @@
                 <p>Usuario</p>
             </div>
             <ul>
-                <div v-if="user.user.roles">
+                <div v-if="user && user.user && user.user.roles">
                     <li v-for="role in user.user.roles" :key="role"><a href="/">{{ role }}</a></li>
                 </div>
                 <li><a href="/login">Cerrar sesión</a></li>

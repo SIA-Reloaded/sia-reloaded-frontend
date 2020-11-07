@@ -9,14 +9,14 @@
 
 <script>
 // import { API, Auth } from "aws-amplify";
-import sidebar from './sidebar'
+import sidebar from "../components/sidebar";
 export default {
   name: "HomeComponent",
   methods: {},
   mounted() {},
-  props: ['user'],
+  props: ["user"],
   components: {
-    sidebar
+    sidebar,
   },
   data: function () {
     return {

@@ -3,7 +3,9 @@
     <sidebar class="sidebar"></sidebar>
     <div class="course-wrapper">
       <h2 class="course-title">
-        <a @click="$router.go(-1)"><font-awesome-icon icon="long-arrow-alt-left" /></a>
+        <a @click="$router.go(-1)"
+          ><font-awesome-icon icon="long-arrow-alt-left"
+        /></a>
         {{ loading_course ? "Cargando" : course.name }}
       </h2>
       <div class="course">
@@ -49,14 +51,14 @@
                   class="student"
                 >
                   <div class="student-id">{{ student.id }}</div>
-                  <div class="student-name">{{ student.firstName }} {{ student.lastName }}</div>
+                  <div class="student-name">
+                    {{ student.firstName }} {{ student.lastName }}
+                  </div>
                   <div class="student-email">{{ student.email }}</div>
                 </div>
               </div>
             </v-tab>
           </vue-tabs>
-          
-          
         </div>
       </div>
     </div>
@@ -65,12 +67,12 @@
 
 <script>
 // import { API, Auth } from "aws-amplify";
-import sidebar from "./sidebar";
-import {VueTabs, VTab} from 'vue-nav-tabs/dist/vue-tabs'
-import 'vue-nav-tabs/themes/vue-tabs.css'
+import sidebar from "../components/sidebar";
+import { VueTabs, VTab } from "vue-nav-tabs/dist/vue-tabs";
+import "vue-nav-tabs/themes/vue-tabs.css";
 export default {
   name: "CourseComponent",
-  props: ['course_prop', 'user'],
+  props: ["course_prop", "user"],
   methods: {
     async getCourse() {
       if (this.course_prop) {
@@ -79,7 +81,9 @@ export default {
       } else {
         try {
           this.loading_course = true;
-          const res = await fetch(`https://62nbonex6j.execute-api.us-east-1.amazonaws.com/Prod/teachers/getCourse?teacherID=test&courseID=${ this.$route.params.course_id }`);
+          const res = await fetch(
+            `https://62nbonex6j.execute-api.us-east-1.amazonaws.com/Prod/teachers/getCourse?teacherID=test&courseID=${this.$route.params.course_id}`
+          );
           const data = await res.json();
           this.course = data;
           this.loading_course = false;
@@ -95,7 +99,7 @@ export default {
   components: {
     sidebar,
     VueTabs,
-    VTab
+    VTab,
   },
   computed: {
     scheduleStr() {
@@ -104,8 +108,8 @@ export default {
         const day = this.course.schedule[i];
         str.push(`${day.weekday} ${day.start_hour}:00-${day.end_hour}:00`);
       }
-      return str.join(' / ');
-    }
+      return str.join(" / ");
+    },
   },
   data: function () {
     return {

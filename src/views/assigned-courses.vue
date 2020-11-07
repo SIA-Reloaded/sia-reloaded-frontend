@@ -26,8 +26,19 @@
             <div class="course-code">{{ course.code }}</div>
             <h4 class="course-name">{{ course.name }}</h4>
             <span class="course-group">Grupo {{ course.group }}</span>
-            <span class="course-group">Número de estudiantes: {{ course.capacity }}</span>
-            <span class="course-link"><router-link v-bind:to="{ name: 'course', params: {'course_id': course.id, 'course_prop': course}}" class="course-link-a">Ir al curso</router-link></span>
+            <span class="course-group"
+              >Número de estudiantes: {{ course.capacity }}</span
+            >
+            <span class="course-link"
+              ><router-link
+                v-bind:to="{
+                  name: 'course',
+                  params: { course_id: course.id, course_prop: course },
+                }"
+                class="course-link-a"
+                >Ir al curso</router-link
+              ></span
+            >
           </div>
         </div>
       </div>
@@ -37,15 +48,17 @@
 
 <script>
 // import { API, Auth } from "aws-amplify";
-import sidebar from "./sidebar";
+import sidebar from "../components/sidebar";
 export default {
   name: "AssignedCoursesComponent",
-  props: ['user'],
+  props: ["user"],
   methods: {
     async getCourses() {
       try {
         this.loading_courses = true;
-        const res = await fetch('https://62nbonex6j.execute-api.us-east-1.amazonaws.com/Prod/teachers/getCourses?teacherID=test');
+        const res = await fetch(
+          "https://62nbonex6j.execute-api.us-east-1.amazonaws.com/Prod/teachers/getCourses?teacherID=test"
+        );
         const data = await res.json();
         this.courses = data;
         this.loading_courses = false;
@@ -92,7 +105,7 @@ export default {
 }
 .list > .course-item {
   border: 1px solid #ccc;
-  box-shadow: 2px 2px 6px 0px  rgba(0,0,0,0.3);
+  box-shadow: 2px 2px 6px 0px rgba(0, 0, 0, 0.3);
   font-family: AncizarSansLight;
 }
 .courses-title {
@@ -107,7 +120,6 @@ export default {
   color: white;
   background-color: #94b43b;
   font-family: AncizarSansLight;
-
 }
 
 .course-name {
@@ -118,8 +130,8 @@ export default {
 }
 
 .course-link-a {
-    color: white;
-    text-decoration: none; 
+  color: white;
+  text-decoration: none;
 }
 
 .course-group {
