@@ -45,15 +45,17 @@ export default {
     signIn: async function () {
       try {
         // await Auth.signIn(this.username, this.password)
-        setTimeout(async ()=> {
-          const res = await fetch(`https://62nbonex6j.execute-api.us-east-1.amazonaws.com/Prod/system/getUserData/${ this.username }`);
+        setTimeout(async () => {
+          const res = await fetch(
+            `https://62nbonex6j.execute-api.us-east-1.amazonaws.com/Prod/system/getUserData/${this.username}`
+          );
           const data = await res.json();
-          console.log(data)
-          this.$emit("userReached", {user: data})
-          this.$router.push('home')
-        }, 1000)
+          console.log(data);
+          this.$emit("userReached", { user: data });
+          this.$router.push("home");
+        }, 1000);
       } catch (error) {
-        this.errorMessage = error.name
+        this.errorMessage = error.name;
       }
     },
   },
@@ -62,13 +64,12 @@ export default {
       username: "",
       password: "",
       errorMessage: "",
-    }
+    };
   },
-}
+};
 </script>
 
 <style scoped>
-
 .wrapper {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -86,7 +87,7 @@ export default {
   top: 80px;
   width: 90%;
   height: 100%;
-  display:inline-block;
+  display: inline-block;
   grid-column: 2/3;
   grid-row: 1fr;
   background-color: rgba(255, 255, 255, 0.4);
@@ -101,8 +102,9 @@ export default {
   background-size: cover;
 }
 .title {
-  margin:40px 6px 2px 0;
-  font-family: AncizarSansLight;
+  margin: 40px 6px 2px 0;
+  font-family: AncizarSans;
+  font-weight: 300;
   color: #707070;
   font-size: 310%;
   letter-spacing: 4px;
@@ -113,7 +115,7 @@ export default {
   background-color: rgba(255, 255, 255, 0);
 }
 input {
-  margin:80px 6px 2px 0;
+  margin: 80px 6px 2px 0;
   font-size: 18px;
   padding: 10px 60px 10px 5px;
   display: inline-block;
@@ -139,7 +141,8 @@ label {
   transition: 0.2s ease all;
   -moz-transition: 0.2s ease all;
   -webkit-transition: 0.2s ease all;
-  font-family: AncizarSansLight;
+  font-family: AncizarSans;
+  font-weight: 300;
 }
 
 /* active state */
@@ -156,7 +159,7 @@ input:valid ~ label {
   margin-right: auto;
   position: relative;
   left: -65px;
-  display:block;
+  display: block;
   width: 50%;
 }
 .bar:before,
@@ -184,13 +187,13 @@ input:focus ~ .bar:after {
   width: 80%;
 }
 
-.boton{
-
-  margin:40px 6px 60px 0;
-  color:#ffffff;
+.boton {
+  margin: 40px 6px 60px 0;
+  color: #ffffff;
   font-weight: 500;
-  display:inline-block;
-  font-family: AncizarSansLight;
+  display: inline-block;
+  font-family: AncizarSans;
+  font-weight: 300;
   letter-spacing: 10px;
   padding-top: 1%;
   padding-bottom: 1%;
@@ -198,17 +201,13 @@ input:focus ~ .bar:after {
   padding-right: 12%;
   text-align: center;
   font-size: 200%;
-  background-color: #94B43B;
+  background-color: #94b43b;
   border-radius: 10px;
   border: 1px solid #777;
-  }
-
-
-
+}
 
 /* HIGHLIGHTER ================================== */
 .highlight {
-
   position: absolute;
   height: 60%;
   width: 100px;
