@@ -1,0 +1,13 @@
+@import '../modules/index';
+
+.inp {
+	@extend .ancizar-font;
+	@extend .text-light;
+	border: 1px solid $grey4;
+	padding: 5px 10px;
+	border-radius: 5px;
+	&:focus {
+		outline: none;
+		border: 1px solid $primary;
+	}
+}

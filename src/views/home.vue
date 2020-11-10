@@ -1,46 +1,20 @@
 <template>
-  <div id="home">
-    <sidebar class="sidebar"></sidebar>
-    <div class="wrapper">
-      <span>{{ message }}</span>
-    </div>
+  <div id="home-content">
+    <input type="text" name="" id="" class="inp" placeholder="asdfasdf" />
   </div>
 </template>
 
 <script>
 // import { API, Auth } from "aws-amplify";
-import sidebar from "../components/sidebar";
 export default {
   name: "HomeComponent",
-  methods: {},
-  mounted() {},
-  props: ["user"],
-  components: {
-    sidebar,
-  },
-  data: function () {
-    return {
-      message: "",
-    };
-  },
 };
 </script>
 
 <style>
-#home {
-  display: grid;
-  grid-template-columns: 15vw 1fr;
-  grid-template-rows: 1fr;
-  grid-template-areas: "sidebar content";
-  height: 100%;
-}
-.sidebar {
-  grid-area: sidebar;
-}
-.wrapper {
-  grid-area: content;
+#home-content {
   background: url("../assets/img/background-login.jpeg") no-repeat;
-  /* Todo: Nueva imagen */
   background-size: cover;
+  height: 100%;
 }
 </style>

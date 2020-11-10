@@ -1,78 +1,73 @@
 <template>
-  <div id="home">
-    <sidebar class="sidebar"></sidebar>
-    <div class="course-wrapper">
-      <h2 class="course-title">
-        <a @click="$router.go(-1)"
-          ><font-awesome-icon icon="long-arrow-alt-left"
-        /></a>
-        {{ loading_course ? "Cargando" : course.name }}
-      </h2>
-      <div class="course">
-        <div class="loading-icon-wrapper" v-if="loading_course">
-          <div class="lds-grid">
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-          </div>
+  <div class="course-wrapper">
+    <h2 class="course-title">
+      <a @click="$router.go(-1)"
+        ><font-awesome-icon icon="long-arrow-alt-left"
+      /></a>
+      {{ loading_course ? "Cargando" : course.name }}
+    </h2>
+    <div class="course">
+      <div class="loading-icon-wrapper" v-if="loading_course">
+        <div class="lds-grid">
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
         </div>
-        <div class="course-info" v-else>
-          <vue-tabs>
-            <v-tab title="Información General">
-              <div class="course-info-columns">
-                <div class="course-info-1">
-                  <p><b>Código:</b> {{ course.id }}</p>
-                  <p><b>Grupo:</b> {{ course.group }}</p>
-                  <p><b>Alumnos:</b> {{ course.students.length }}</p>
-                  <p><b>Créditos:</b> {{ course.credits }}</p>
-                  <p><b>Horario:</b> {{ scheduleStr }}</p>
-                </div>
-                <div class="course-info-2">
-                  <p v-if="course.monitor">
-                    <b>Monitor:</b> {{ course.monitor.name }}
-                    {{ course.monitor.lastname }} ({{ course.monitor.email }})
-                  </p>
-                </div>
+      </div>
+      <div class="course-info" v-else>
+        <vue-tabs>
+          <v-tab title="Información General">
+            <div class="course-info-columns">
+              <div class="course-info-1">
+                <p><b>Código:</b> {{ course.id }}</p>
+                <p><b>Grupo:</b> {{ course.group }}</p>
+                <p><b>Alumnos:</b> {{ course.students.length }}</p>
+                <p><b>Créditos:</b> {{ course.credits }}</p>
+                <p><b>Horario:</b> {{ scheduleStr }}</p>
               </div>
-            </v-tab>
+              <div class="course-info-2">
+                <p v-if="course.monitor">
+                  <b>Monitor:</b> {{ course.monitor.name }}
+                  {{ course.monitor.lastname }} ({{ course.monitor.email }})
+                </p>
+              </div>
+            </div>
+          </v-tab>
 
-            <v-tab title="Alumnos">
-              <div class="student-list">
-                <h3 class="course-title">Estudiantes</h3>
-                <div
-                  v-for="student in course.students"
-                  v-bind:key="student.id"
-                  class="student"
-                >
-                  <div class="student-id">{{ student.id }}</div>
-                  <div class="student-name">
-                    {{ student.firstName }} {{ student.lastName }}
-                  </div>
-                  <div class="student-email">{{ student.email }}</div>
+          <v-tab title="Alumnos">
+            <div class="student-list">
+              <h3 class="course-title">Estudiantes</h3>
+              <div
+                v-for="student in course.students"
+                v-bind:key="student.id"
+                class="student"
+              >
+                <div class="student-id">{{ student.id }}</div>
+                <div class="student-name">
+                  {{ student.firstName }} {{ student.lastName }}
                 </div>
+                <div class="student-email">{{ student.email }}</div>
               </div>
-            </v-tab>
-          </vue-tabs>
-        </div>
+            </div>
+          </v-tab>
+        </vue-tabs>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-// import { API, Auth } from "aws-amplify";
-import sidebar from "../components/sidebar";
 import { VueTabs, VTab } from "vue-nav-tabs/dist/vue-tabs";
 import "vue-nav-tabs/themes/vue-tabs.css";
 export default {
   name: "CourseComponent",
-  props: ["course_prop", "user"],
+  props: ["course_prop"],
   methods: {
     async getCourse() {
       if (this.course_prop) {
@@ -97,7 +92,6 @@ export default {
     this.getCourse();
   },
   components: {
-    sidebar,
     VueTabs,
     VTab,
   },
@@ -121,18 +115,7 @@ export default {
 </script>
 
 <style>
-#home {
-  display: grid;
-  grid-template-columns: 15vw 1fr;
-  grid-template-rows: 1fr;
-  grid-template-areas: "sidebar content";
-  height: 100%;
-}
-.sidebar {
-  grid-area: sidebar;
-}
 .course-wrapper {
-  grid-area: content;
   padding: 1em;
 }
 

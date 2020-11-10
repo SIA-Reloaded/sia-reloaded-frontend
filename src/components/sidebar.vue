@@ -1,58 +1,92 @@
 <template>
   <nav id="sidebar-wrapper">
-      <div class="item">
-          Apoyo académico
-      </div>
-      <router-link class="subitem" to="/teacher/courses">
-          Cursos asignados
-      </router-link>
-    <!-- <router-link
-      class="item"
-      v-for="item in items"
-      v-bind:key="item.id"
-      v-bind:to="item.link"
+    <router-link
+      v-for="(item, idx) in items"
+      :key="idx"
+      class="item text-grey0"
+      :to="{ name: item.router_name }"
     >
-      {{ item.label }}
-    </router-link> -->
+      <div
+        :class="{
+          'inner-item': true,
+          selected: $route.name === item.router_name,
+        }"
+      >
+        <i class="material-icons">{{ item.icon }}</i>
+        <span class="ancizar-font text-bold">{{ item.label }}</span>
+      </div>
+    </router-link>
   </nav>
 </template>
 
 <script>
 export default {
   name: "sidebar",
+  beforeMount() {
+    const role = localStorage.getItem("active-role");
+    console.log(role);
+    if (role === "TEACHER") {
+      Array.prototype.push.apply(this.items, [
+        {
+          label: "Cursos asignados",
+          router_name: "assigned_courses",
+          icon: "receipt_long",
+        },
+      ]);
+    } else if (role === "ADMIN") {
+      Array.prototype.push.apply(this.items, [
+        {
+          label: "Solicitudes",
+          router_name: "homeasd",
+          icon: "question_answer",
+        },
+        {
+          label: "Grupos",
+          router_name: "groups",
+          icon: "group_work",
+        },
+      ]);
+    }
+  },
   data() {
     return {
-      items: [
-        { id: 1, label: "Hoja de Vida", link: "" },
-        { id: 2, label: "Apoyo Académico", link: "" },
-        { id: 3, label: "Información Financiera", link: "" },
-        { id: 4, label: "Encuestas", link: "" },
-        { id: 5, label: "Otros", link: "" },
-      ],
+      items: [{ label: "Inicio", router_name: "home", icon: "home" }],
     };
   },
 };
 </script>
 
-<style>
+<style lang="scss">
 #sidebar-wrapper {
-  background-color: #b1b2b0;
+  background-color: $white;
   height: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 10px;
 }
 .item {
-  display: block;
-  text-align: center;
-  background-color: #94b43b;
-  font-family: AncizarSansItalic;
-  color: white;
-  border-bottom-right-radius: 10px;
-  border-bottom-left-radius: 10px;
-  box-shadow: 0px 1px 1px 1px #777;
+  display: flex;
+  padding: 10px;
+  text-decoration: none;
+  flex-direction: row;
+  justify-content: center;
+  align-items: flex-end;
 }
-.subitem {
-  display: block;
-  text-align: center;
-  font-family: AncizarSansItalic;
-  color: white;
+.inner-item {
+  display: flex;
+  padding: 10px;
+  text-decoration: none;
+  flex-direction: row;
+  justify-content: center;
+  align-items: flex-end;
+  border-radius: 20px;
+  i {
+    margin-right: 5px;
+    font-size: 1.5em;
+  }
+  &.selected {
+    background-color: $grey5;
+  }
 }
 </style>

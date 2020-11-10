@@ -1,0 +1,175 @@
+@import '../modules/text';
+@import '../modules/colors';
+
+.btn {
+  @extend .ancizar-font;
+	@extend .text-regular;
+	border: 1px solid $grey3;
+	outline: none;
+	border-radius: 20px;
+	padding: 5px 15px;
+	cursor: pointer;
+	display: flex;
+	align-items: center;
+	background-color: $white;
+	i {
+    padding-right: 10px;
+	}
+	&:hover {
+		background-color: $grey1;
+	  border: 1px solid $grey1;
+		color: $white;
+	}
+	&.btn-icon {
+		padding: 5px;
+		i {
+			padding: 0;
+		}
+	}
+  &.btn-primary {
+		border: 1px solid $primary;
+		color: $grey3;
+	}
+	&.btn-primary:hover {
+		background-color: $primary;
+		color: $white;
+	}
+  &.btn-primary-dark {
+		border: 1px solid $primary-dark;
+		color: $grey3;
+	}
+	&.btn-primary-dark:hover {
+		background-color: $primary-dark;
+		color: $white;
+	}
+  &.btn-blue {
+		border: 1px solid $blue;
+		color: $grey3;
+	}
+	&.btn-blue:hover {
+		background-color: $blue;
+		color: $white;
+	}
+  &.btn-blue-dark {
+		border: 1px solid $blue-dark;
+		color: $grey3;
+	}
+	&.btn-blue-dark:hover {
+		background-color: $blue-dark;
+		color: $white;
+	}
+  &.btn-green {
+		border: 1px solid $green;
+		color: $grey3;
+	}
+	&.btn-green:hover {
+		background-color: $green;
+		color: $white;
+	}
+  &.btn-yellow {
+		border: 1px solid $yellow;
+		color: $grey3;
+	}
+	&.btn-yellow:hover {
+		background-color: $yellow;
+		color: $white;
+	}
+  &.btn-cream {
+		border: 1px solid $cream;
+		color: $grey3;
+	}
+	&.btn-cream:hover {
+		background-color: $cream;
+		color: $white;
+	}
+  &.btn-red-light {
+		border: 1px solid $red-light;
+		color: $grey3;
+	}
+	&.btn-red-light:hover {
+		background-color: $red-light;
+		color: $white;
+	}
+  &.btn-red {
+		border: 1px solid $red;
+		color: $grey3;
+	}
+	&.btn-red:hover {
+		background-color: $red;
+		color: $white;
+	}
+  &.btn-purple {
+		border: 1px solid $purple;
+		color: $grey3;
+	}
+	&.btn-purple:hover {
+		background-color: $purple;
+		color: $white;
+	}
+  &.btn-black {
+		border: 1px solid $black;
+		color: $grey3;
+	}
+	&.btn-black:hover {
+		background-color: $black;
+		color: $white;
+	}
+  &.btn-grey0 {
+		border: 1px solid $grey0;
+		color: $grey3;
+	}
+	&.btn-grey0:hover {
+		background-color: $grey0;
+		color: $white;
+	}
+  &.btn-grey1 {
+		border: 1px solid $grey1;
+		color: $grey3;
+	}
+	&.btn-grey1:hover {
+		background-color: $grey1;
+		color: $white;
+	}
+  &.btn-grey2 {
+		border: 1px solid $grey2;
+		color: $grey3;
+	}
+	&.btn-grey2:hover {
+		background-color: $grey2;
+		color: $white;
+	}
+  &.btn-grey3 {
+		border: 1px solid $grey3;
+		color: $grey3;
+	}
+	&.btn-grey3:hover {
+		background-color: $grey3;
+		color: $white;
+	}
+  &.btn-grey4 {
+		border: 1px solid $grey4;
+		color: $grey3;
+	}
+	&.btn-grey4:hover {
+		background-color: $grey4;
+		color: $white;
+	}
+  &.btn-grey5 {
+		border: 1px solid $grey5;
+		color: $grey3;
+	}
+	&.btn-grey5:hover {
+		background-color: $grey5;
+		color: $white;
+	}
+  &.btn-white {
+		border: 1px solid $white;
+		color: $grey3;
+	}
+	&.btn-white:hover {
+		background-color: $white;
+		color: $white;
+	}
+}
+
+

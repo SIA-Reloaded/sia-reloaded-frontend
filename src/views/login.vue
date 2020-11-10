@@ -50,9 +50,11 @@ export default {
             `https://62nbonex6j.execute-api.us-east-1.amazonaws.com/Prod/system/getUserData/${this.username}`
           );
           const data = await res.json();
-          console.log(data);
-          this.$emit("userReached", { user: data });
-          this.$router.push("home");
+          localStorage.setItem("user", JSON.stringify(data));
+          if (data.roles !== []) {
+            localStorage.setItem("active-role", data.roles[0]);
+          }
+          this.$router.push({ name: "home" });
         }, 1000);
       } catch (error) {
         this.errorMessage = error.name;

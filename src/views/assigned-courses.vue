@@ -1,45 +1,42 @@
 <template>
-  <div id="home">
-    <sidebar class="sidebar"></sidebar>
-    <div class="courses-wrapper">
-      <h2 class="courses-title">Cursos asignados</h2>
-      <div class="courses">
-        <div class="loading-icon-wrapper" v-if="loading_courses">
-          <div class="lds-grid">
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-          </div>
+  <div class="courses-wrapper">
+    <h2 class="courses-title ancizar-font">Cursos asignados</h2>
+    <div class="courses">
+      <div class="loading-icon-wrapper" v-if="loading_courses">
+        <div class="lds-grid">
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
         </div>
-        <div class="list" v-else>
-          <div
-            v-for="course in courses"
-            v-bind:key="course.id"
-            class="course-item"
+      </div>
+      <div class="list" v-else>
+        <div
+          v-for="course in courses"
+          v-bind:key="course.id"
+          class="course-item"
+        >
+          <div class="course-code">{{ course.code }}</div>
+          <h4 class="course-name">{{ course.name }}</h4>
+          <span class="course-group">Grupo {{ course.group }}</span>
+          <span class="course-group"
+            >Número de estudiantes: {{ course.capacity }}</span
           >
-            <div class="course-code">{{ course.code }}</div>
-            <h4 class="course-name">{{ course.name }}</h4>
-            <span class="course-group">Grupo {{ course.group }}</span>
-            <span class="course-group"
-              >Número de estudiantes: {{ course.capacity }}</span
-            >
-            <span class="course-link"
-              ><router-link
-                v-bind:to="{
-                  name: 'course',
-                  params: { course_id: course.id, course_prop: course },
-                }"
-                class="course-link-a"
-                >Ir al curso</router-link
-              ></span
-            >
-          </div>
+          <span class="course-link"
+            ><router-link
+              v-bind:to="{
+                name: 'course',
+                params: { course_id: course.id, course_prop: course },
+              }"
+              class="course-link-a"
+              >Ir al curso</router-link
+            ></span
+          >
         </div>
       </div>
     </div>
@@ -47,11 +44,8 @@
 </template>
 
 <script>
-// import { API, Auth } from "aws-amplify";
-import sidebar from "../components/sidebar";
 export default {
   name: "AssignedCoursesComponent",
-  props: ["user"],
   methods: {
     async getCourses() {
       try {
@@ -70,9 +64,6 @@ export default {
   mounted() {
     this.getCourses();
   },
-  components: {
-    sidebar,
-  },
   data: function () {
     return {
       courses: [],
@@ -83,18 +74,7 @@ export default {
 </script>
 
 <style>
-#home {
-  display: grid;
-  grid-template-columns: 15vw 1fr;
-  grid-template-rows: 1fr;
-  grid-template-areas: "sidebar content";
-  height: 100%;
-}
-.sidebar {
-  grid-area: sidebar;
-}
 .courses-wrapper {
-  grid-area: content;
   padding: 1em;
 }
 .list {

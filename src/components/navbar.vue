@@ -18,15 +18,28 @@
         >
       </div>
     </div>
-    <div class="header__menu" v-if="user.user">
+    <div class="header__menu" v-if="user">
       <img
         class="profile-img"
         src="../assets/img/avatar.png"
         alt="Imagen de perfil"
       />
       <span class="ancizar-font text-light text-grey1">{{
-        user.user.basicData.firstName
+        user.basicData.firstName
       }}</span>
+      <div class="profile-menu">
+        <span class="ancizar-font text-grey1">Usar la plataforma como:</span>
+        <span
+          class="ancizar-font text-grey1 menu-item role"
+          v-for="role in user.roles"
+          :key="role"
+          @click="() => useAs(role)"
+          >{{ role }}</span
+        >
+        <span class="ancizar-font text-grey1 menu-item" @click="logout"
+          >Cerrar sesión</span
+        >
+      </div>
     </div>
   </header>
 </template>
@@ -34,7 +47,32 @@
 <script>
 export default {
   name: "navbar",
-  props: ["user"],
+  beforeMount() {
+    this.user = JSON.parse(localStorage.getItem("user"));
+    console.log(this.user);
+  },
+  methods: {
+    logout() {
+      localStorage.removeItem("active-role");
+      localStorage.removeItem("user");
+      this.$router.push({ name: "login" });
+    },
+    useAs(role) {
+      localStorage.removeItem("active-role");
+      localStorage.setItem("active-role", role);
+      this.$emit("new-role", role);
+      try {
+        this.$router.push({ name: "home" });
+      } catch (err) {
+        this.$router.go();
+      }
+    },
+  },
+  data() {
+    return {
+      user: {},
+    };
+  },
 };
 </script>
 
@@ -46,7 +84,6 @@ header {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  border-bottom: 1px solid #707070;
 }
 .logo {
   max-width: 6rem;
@@ -99,6 +136,28 @@ header {
   display: flex;
   align-items: center;
   flex-direction: row-reverse;
-  cursor: pointer;
+  &:hover {
+    .profile-menu {
+      display: flex;
+    }
+  }
+}
+.profile-menu {
+  position: fixed;
+  top: 10vh;
+  right: 0;
+  padding: 20px;
+  background-color: $white;
+  display: none;
+  flex-direction: column;
+  .role {
+    padding-left: 5px;
+  }
+  .menu-item {
+    cursor: pointer;
+    &:hover {
+      text-decoration: underline;
+    }
+  }
 }
 </style>
